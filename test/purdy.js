@@ -28,7 +28,10 @@ describe('Purdy', function() {
             d: {king: 'cobra'},
             null: null,
             undefined: undefined,
-            regexp: new RegExp
+            regexp: new RegExp,
+            falseBool: false,
+            trueBool: true,
+            emptyArr: []
         });
         done();
     });
