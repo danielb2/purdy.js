@@ -13,6 +13,6 @@
   },
   "dependencies": {
     "colors": "0.6.x",
-    "traverse": "^0.6.6"
+    "hoek": "^2.1.0"
   }
 }
