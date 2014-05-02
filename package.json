@@ -1,0 +1,18 @@
+{
+  "name": "purdy",
+  "version": "0.0.0",
+  "description": "purdy print objects",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "lab": "3.x.x"
+  },
+  "dependencies": {
+    "colors": "0.6.x",
+    "traverse": "^0.6.6"
+  }
+}
