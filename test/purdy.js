@@ -21,12 +21,10 @@ describe('Purdy', function() {
     it('should purdy print', function(done) {
 
         Purdy([1,2,'foo', it, Array.isArray, new Date,1,1,1,1,12,[1,2]]);
-        var circularObj = { 
-            a: {
-                b: {}
-            }
-        };
-        circularObj.a.b = circularObj.a;
+        var circularObj = { };
+        circularObj.a = circularObj;
+        var circ = [];
+        circ.push(circ);
         Purdy({
             a: 3,
             bn: 'foo',
@@ -38,7 +36,8 @@ describe('Purdy', function() {
             falseBool: false,
             trueBool: true,
             emptyArr: [],
-            circular: circularObj
+            circular: circularObj,
+            circularArr: circ
         });
         done();
     });
