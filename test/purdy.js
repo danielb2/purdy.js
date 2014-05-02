@@ -21,7 +21,15 @@ describe('Purdy', function() {
     it('should purdy print', function(done) {
 
         Purdy([1,2,'foo', it, Array.isArray, new Date,1,1,1,1,12,[1,2]]);
-        Purdy({a: 3, bn: 'foo', raino: it, d: {king: 'cobra'}, null: null, undefined: undefined});
+        Purdy({
+            a: 3,
+            bn: 'foo',
+            raino: it,
+            d: {king: 'cobra'},
+            null: null,
+            undefined: undefined,
+            regexp: new RegExp
+        });
         done();
     });
 });
