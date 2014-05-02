@@ -22,10 +22,9 @@ describe('Purdy', function() {
 
         Purdy('winter');
         Purdy(123);
-        Purdy([1,2,'foo', it, Array.isArray, new Date]);
+        Purdy([1,2,'foo', it, Array.isArray, new Date,1,1,1,1,12,[1,2]]);
         Purdy({a: 3, b: 'foo', c: it});
         Purdy(Date);
-        Purdy([1,2,[1,2]]);
         done();
     });
 });
