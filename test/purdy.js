@@ -39,6 +39,7 @@ describe('Purdy', function() {
             circular: circularObj,
             circularArr: circ
         });
+        Purdy('plain', {plain: true});
         done();
     });
 });

@@ -1,6 +1,6 @@
 {
   "name": "purdy",
-  "version": "0.0.7",
+  "version": "0.1.0",
   "description": "print objects real purdy",
   "main": "index.js",
   "scripts": {
