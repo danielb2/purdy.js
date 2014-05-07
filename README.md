@@ -33,7 +33,24 @@ writeLog(purdyString);
 ### Examples
 
 ````javascript
-// Purdy([1,2,'foo', it, Array.isArray, new Date,1,1,1,1,12,[1,2]]);
+// var circularObj = { };
+// circularObj.a = circularObj;
+// var circ = [];
+// circ.push(circ);
+// Purdy({
+//     a: 3,
+//     bn: 'foo',
+//     raino: it,
+//     d: {king: 'cobra'},
+//     null: null,
+//     undefined: undefined,
+//     regexp: new RegExp,
+//     falseBool: false,
+//     trueBool: true,
+//     emptyArr: [],
+//     circular: circularObj,
+//     circularArr: circ
+// });
 
 {
               a: 3,
@@ -58,24 +75,7 @@ writeLog(purdyString);
 ```
 
 ```javascript
-// var circularObj = { };
-// circularObj.a = circularObj;
-// var circ = [];
-// circ.push(circ);
-// Purdy({
-//     a: 3,
-//     bn: 'foo',
-//     raino: it,
-//     d: {king: 'cobra'},
-//     null: null,
-//     undefined: undefined,
-//     regexp: new RegExp,
-//     falseBool: false,
-//     trueBool: true,
-//     emptyArr: [],
-//     circular: circularObj,
-//     circularArr: circ
-// });
+// Purdy([1,2,'foo', it, Array.isArray, new Date,1,1,1,1,12,[1,2]]);
 
 [
     [ 0] 1,
