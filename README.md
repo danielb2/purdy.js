@@ -17,7 +17,7 @@ you're dealing with.
 
 * `object` - anything, number, object, array, etc.
 * `options` - optional object with the following keys.
-    * `plain` - when `true`, prints result without colors. Defaults to `false`.
+    * `plain` - when `true`, prints result without colors. Defaults to `false` with tty, `true` when not.
 
 
 ### `Purdy.stringify(object, [options])`
