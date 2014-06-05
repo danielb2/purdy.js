@@ -1,6 +1,6 @@
 {
   "name": "purdy",
-  "version": "0.3.1",
+  "version": "0.3.2",
   "description": "print objects real purdy in color",
   "main": "index.js",
   "scripts": {
@@ -9,17 +9,24 @@
   "homepage": "https://github.com/danielb2/purdy.js",
   "bugs": "https://github.com/danielb2/purdy.js/issues",
   "repository": {
-      "type": "git",
-      "url": "https://github.com/danielb2/purdy.js.git"
+    "type": "git",
+    "url": "https://github.com/danielb2/purdy.js.git"
   },
   "author": "Daniel Bretoi",
-  "keywords": [ "ansi", "terminal", "colors", "pretty", "print", "color" ],
+  "keywords": [
+    "ansi",
+    "terminal",
+    "colors",
+    "pretty",
+    "print",
+    "color"
+  ],
   "license": "MIT",
   "devDependencies": {
     "lab": "3.x.x"
   },
   "dependencies": {
-    "colors": "0.6.x",
-    "hoek": "2.1.x"
+    "hoek": "2.1.x",
+    "chalk": "0.4.x"
   }
 }
