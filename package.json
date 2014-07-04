@@ -1,6 +1,6 @@
 {
   "name": "purdy",
-  "version": "0.3.2",
+  "version": "0.4.0",
   "description": "print objects real purdy in color",
   "main": "index.js",
   "scripts": {
@@ -23,6 +23,7 @@
   ],
   "license": "MIT",
   "devDependencies": {
+    "hoek": "^2.1.1",
     "lab": "3.x.x"
   },
   "dependencies": {

@@ -1,3 +1,4 @@
+var Hoek = require('hoek');
 var Lab = require('lab');
 var Purdy = require('../');
 
@@ -31,7 +32,7 @@ describe('Purdy', function () {
         var circ = [];
         circ.push(circ);
         var out = Purdy.stringify(circularObj);
-        expect(out).to.equal('{\n    \u001b[1m\u001b[37ma\u001b[39m\u001b[22m: \u001b[1m\u001b[90m[Circular]\u001b[39m\u001b[22m\n}');
+        expect(out).to.equal('{\n    \u001b[1m\u001b[37m  a\u001b[39m\u001b[22m: \u001b[1m\u001b[90m[Circular]\u001b[39m\u001b[22m\n}');
         out = Purdy.stringify(circ);
         expect(out).to.equal('[\n    [\u001b[1m\u001b[37m0\u001b[39m\u001b[22m] \u001b[1m\u001b[90m[Circular]\u001b[39m\u001b[22m\n]');
         done();
@@ -128,6 +129,7 @@ describe('Purdy', function () {
             array: [1, 2, [1, 2]],
             object: { another: 'string' }
         });
+
         expect(out).to.equal('{\n    \u001b[1m\u001b[37m array\u001b[39m\u001b[22m: [\n        [\u001b[1m\u001b[37m0\u001b[39m\u001b[22m] \u001b[1m\u001b[34m1\u001b[39m\u001b[22m,\n        [\u001b[1m\u001b[37m1\u001b[39m\u001b[22m] \u001b[1m\u001b[34m2\u001b[39m\u001b[22m,\n        [\u001b[1m\u001b[37m2\u001b[39m\u001b[22m] [\n            [\u001b[1m\u001b[37m0\u001b[39m\u001b[22m] \u001b[1m\u001b[34m1\u001b[39m\u001b[22m,\n            [\u001b[1m\u001b[37m1\u001b[39m\u001b[22m] \u001b[1m\u001b[34m2\u001b[39m\u001b[22m\n        ]\n    ],\n    \u001b[1m\u001b[37mobject\u001b[39m\u001b[22m: {\n        \u001b[1m\u001b[37manother\u001b[39m\u001b[22m: \u001b[33m\'string\'\u001b[39m\n    }\n}');
         done();
     });
@@ -138,6 +140,27 @@ describe('Purdy', function () {
         Purdy.stringify(obj);
         var out = Purdy.stringify(obj, { plain: true });
         expect(out).to.not.equal('[Circular]');
+        done();
+    });
+
+    it('will keep a path for an object in Hoek format', function (done) {
+
+        var obj = {
+            travel: {
+                down: {
+                    a: [{
+                        path: 'to get here'
+                    }]
+                }
+            }
+        };
+        var Hoek = require('hoek');
+        var orig = Hoek.clone(obj);
+
+        var out = Purdy.stringify(obj, { plain: false, path: true });
+
+        expect(out).to.equal('{\n    \u001b[1m\u001b[37mtravel\u001b[39m\u001b[22m: {\n        \u001b[34m// \u001b[39m\u001b[34mtravel.down\u001b[39m\n        \u001b[1m\u001b[37mdown\u001b[39m\u001b[22m: {\n            \u001b[34m// \u001b[39m\u001b[34mtravel.down.a\u001b[39m\n            \u001b[1m\u001b[37m  a\u001b[39m\u001b[22m: [\n                \u001b[34m// \u001b[39m\u001b[34mtravel.down.a.0\u001b[39m\n                [\u001b[1m\u001b[37m0\u001b[39m\u001b[22m] {\n                    \u001b[34m// \u001b[39m\u001b[34mtravel.down.a.0.path\u001b[39m\n                    \u001b[1m\u001b[37mpath\u001b[39m\u001b[22m: \u001b[33m\'to get here\'\u001b[39m\n                }\n            ]\n        }\n    }\n}');
+        expect(obj).to.deep.equal(orig);
         done();
     });
 
