@@ -154,7 +154,6 @@ describe('Purdy', function () {
                 }
             }
         };
-        var Hoek = require('hoek');
         var orig = Hoek.clone(obj);
 
         var out = Purdy.stringify(obj, { plain: false, path: true });
