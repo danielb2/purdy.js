@@ -126,7 +126,7 @@ writeLog(purdyString);
 }
 
 // var Hoek = require('hoek');
-// Purdy(Hoek.reach(obj, 'travel.down.some.0.alternative'));
+// Purdy(Hoek.reach(obj, 'travel.down.a.0.path'));
 
 {
         path: 'to get here'
