@@ -18,6 +18,8 @@ you're dealing with.
 * `object` - anything, number, object, array, etc.
 * `options` - optional object with the following keys.
     * `plain` - when `true`, prints result without colors. Defaults to `false` with tty, `true` when not.
+    * `path` - when `true`, prints result with a path (To be used with [Hoek.reach()](https://github.com/spumko/hoek#reachobj-chain-options))
+    * `pathPrefix` - prefix for path. default: `// `
 
 
 ### `Purdy.stringify(object, [options])`
@@ -95,6 +97,43 @@ writeLog(purdyString);
     ]
 ]
 ```
+
+``` javascript
+// var obj = {
+//     travel: {
+//         down: {
+//             a: [{
+//                 path: 'to get here'
+//             }]
+//         }
+//     }
+// Purdy(obj, { path: true });
+
+{
+    travel: {
+        // travel.down
+        down: {
+            // travel.down.a
+              a: [
+                // travel.down.a.0
+                [0] {
+                    // travel.down.a.0.path
+                    path: 'to get here'
+                }
+            ]
+        }
+    }
+}
+
+// var Hoek = require('hoek');
+// Purdy(Hoek.reach(obj, 'travel.down.some.0.alternative'));
+
+{
+        path: 'to get here'
+}
+
+```
+
 
 
 ## Acknowledgements
