@@ -32,9 +32,9 @@ describe('Purdy', function () {
         var circ = [];
         circ.push(circ);
         var out = Purdy.stringify(circularObj);
-        expect(out).to.equal('{\n    \u001b[1m\u001b[37m  a\u001b[39m\u001b[22m: \u001b[1m\u001b[90m[Circular]\u001b[39m\u001b[22m\n}');
+        expect(out).to.equal('{\n    \u001b[1m\u001b[37m  a\u001b[39m\u001b[22m: \u001b[1m\u001b[90m[Circular~]\u001b[39m\u001b[22m\n}');
         out = Purdy.stringify(circ);
-        expect(out).to.equal('[\n    [\u001b[1m\u001b[37m0\u001b[39m\u001b[22m] \u001b[1m\u001b[90m[Circular]\u001b[39m\u001b[22m\n]');
+        expect(out).to.equal('[\n    [\u001b[1m\u001b[37m0\u001b[39m\u001b[22m] \u001b[1m\u001b[90m[Circular~]\u001b[39m\u001b[22m\n]');
         done();
     });
 
@@ -140,6 +140,27 @@ describe('Purdy', function () {
         Purdy.stringify(obj);
         var out = Purdy.stringify(obj, { plain: true });
         expect(out).to.not.equal('[Circular]');
+        done();
+    });
+
+    it('shows circular reference with path', function (done) {
+
+        var repeatObj = {
+            text: 'repeating object'
+        };
+        var repeatArr = ['repeating array'];
+
+        var obj = {
+            a: { nested: repeatObj },
+            b: { alsoNested: repeatObj },
+            more: [repeatArr],
+            array: [repeatArr]
+
+        };
+        obj.top = obj;
+        Purdy.stringify(obj);
+        var out = Purdy.stringify(obj, { plain: true });
+        expect(out).to.equal("{\n        a: {\n        nested: {\n            text: 'repeating object'\n        }\n    },\n        b: {\n        alsoNested: [Circular~ a.nested]\n    },\n     more: [\n        [0] [\n            [0] 'repeating array'\n        ]\n    ],\n    array: [\n        [0] [Circular~ more.0]\n    ],\n      top: [Circular~]\n}");
         done();
     });
 
