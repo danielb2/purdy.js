@@ -63,7 +63,7 @@ describe('Purdy', function () {
     it('should print a date', function (done) {
 
         var out = Purdy.stringify(new Date(2014, 5, 6, 21, 22, 21));
-        expect(out).to.equal('\u001b[32mFri Jun 06 2014 21:22:21 GMT-0700 (PDT)\u001b[39m');
+        expect(out).to.equal('\u001b[32m' + new Date(2014, 5, 6, 21, 22, 21) + '\u001b[39m');
         done();
     });
 
