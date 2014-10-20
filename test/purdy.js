@@ -5,9 +5,10 @@ var Purdy = require('../');
 
 // Test shortcuts
 
+var lab = exports.lab = Lab.script();
 var expect = Lab.expect;
-var describe = Lab.experiment;
-var it = Lab.test;
+var describe = lab.describe;
+var it = lab.it;
 
 
 describe('Purdy', function () {
