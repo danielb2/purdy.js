@@ -20,6 +20,7 @@ you're dealing with.
     * `plain` - when `true`, prints result without colors. Defaults to `false` with tty, `true` when not.
     * `path` - when `true`, prints result with a path (To be used with [Hoek.reach()](https://github.com/spumko/hoek#reachobj-chain-options))
     * `pathPrefix` - prefix for path. default: `// `
+    * `arrayIndex` - enables index printing for arrays. default: `true`
 
 
 ### `Purdy.stringify(object, [options])`

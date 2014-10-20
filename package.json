@@ -1,6 +1,6 @@
 {
   "name": "purdy",
-  "version": "1.0.1",
+  "version": "1.1.0",
   "description": "pretty print objects in real purdy colors",
   "main": "index.js",
   "scripts": {
