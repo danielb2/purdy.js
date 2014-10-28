@@ -47,7 +47,7 @@ describe('Purdy', function () {
         var circ = [];
         circ.push(circ);
         var out = Purdy.stringify(circularObj);
-        expect(out).to.equal('{\n    \u001b[1m\u001b[37m  a\u001b[39m\u001b[22m: \u001b[1m\u001b[90m[Circular~]\u001b[39m\u001b[22m\n}');
+        expect(out).to.equal('{\n    \u001b[1m\u001b[37ma\u001b[39m\u001b[22m: \u001b[1m\u001b[90m[Circular~]\u001b[39m\u001b[22m\n}');
         out = Purdy.stringify(circ);
         expect(out).to.equal('[\n    [\u001b[1m\u001b[37m0\u001b[39m\u001b[22m] \u001b[1m\u001b[90m[Circular~]\u001b[39m\u001b[22m\n]');
         done();
@@ -199,5 +199,15 @@ describe('Purdy', function () {
         done();
     });
 
+    it('indents object the way it should', function (done) {
+
+        var obj  = {
+            a: 2323
+        };
+
+        var out = Purdy.stringify(obj, { arrayIndex: false, plain: true })
+        expect(out).to.equal('{\n    a: 2323\n}');
+        done();
+    });
 });
 
