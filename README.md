@@ -22,6 +22,7 @@ you're dealing with.
     * `pathPrefix` - prefix for path. default: `// `
     * `arrayIndex` - enables index printing for arrays. default: `true`
     * `indent` - defines the number of spaces to indent default: `4`
+    * `align` - determines how to align object keys. default: `right`
 
 
 ### `Purdy.stringify(object, [options])`

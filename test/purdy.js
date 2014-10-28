@@ -209,5 +209,21 @@ describe('Purdy', function () {
         expect(out).to.equal('{\n    a: 2323\n}');
         done();
     });
+
+    it('aligns object the way it should', function (done) {
+
+        var obj = {
+            longthing: 3,
+            a: 1,
+            b: 1,
+            c: 1,
+        };
+
+        var out = Purdy.stringify(obj, { arrayIndex: false, plain: true, align: 'left' })
+        expect(out).to.equal('{\n    longthing: 3,\n    a: 1,\n    b: 1,\n    c: 1\n}');
+        out = Purdy.stringify(obj, { arrayIndex: false, plain: true, align: 'right' })
+        expect(out).to.equal('{\n    longthing: 3,\n            a: 1,\n            b: 1,\n            c: 1\n}');
+        done();
+    });
 });
 
