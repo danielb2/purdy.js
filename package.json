@@ -1,6 +1,6 @@
 {
   "name": "purdy",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "description": "pretty print objects in real purdy colors. Allows clearer visualization of objects than you get from most pretty printers due to colors. It will also print out the complete path to an object, something that's extremly useful for debugging.",
   "main": "index.js",
   "scripts": {
