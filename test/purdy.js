@@ -23,7 +23,14 @@ describe('Purdy', function () {
     it('allows for removal of array index', function (done) {
 
         var out = Purdy.stringify([1, 2, 1, 1, 1, 1, 12, [1, 2]], { plain: true, arrayIndex: false });
-        expect(out).to.equal('[\n     1,\n     2,\n     1,\n     1,\n     1,\n     1,\n     12,\n     [\n         1,\n         2\n    ]\n]');
+        expect(out).to.equal('[\n    1,\n    2,\n    1,\n    1,\n    1,\n    1,\n    12,\n    [\n        1,\n        2\n    ]\n]');
+        done();
+    });
+
+    it('honors indent level', function (done) {
+
+        var out = Purdy.stringify([1, 2, 1, 1, 1, 1, 12, [1, 2]], { plain: true, arrayIndex: false, indent: 2 });
+        expect(out).to.equal('[\n  1,\n  2,\n  1,\n  1,\n  1,\n  1,\n  12,\n  [\n    1,\n    2\n  ]\n]');
         done();
     });
 

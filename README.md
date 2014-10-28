@@ -21,6 +21,7 @@ you're dealing with.
     * `path` - when `true`, prints result with a path (To be used with [Hoek.reach()](https://github.com/spumko/hoek#reachobj-chain-options))
     * `pathPrefix` - prefix for path. default: `// `
     * `arrayIndex` - enables index printing for arrays. default: `true`
+    * `indent` - defines the number of spaces to indent default: `4`
 
 
 ### `Purdy.stringify(object, [options])`
