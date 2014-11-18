@@ -13,6 +13,14 @@ var it = lab.it;
 
 describe('Purdy', function () {
 
+    it('should display an error', function (done) {
+
+        var error = new Error('plain error');
+        var out = Purdy.stringify(error);
+        expect(out).to.equal('\u001b[31m[Error: plain error]\u001b[39m');
+        done();
+    });
+
     it('should display an error with detail', function (done) {
 
         var error = new Error('some bad, bad error');
