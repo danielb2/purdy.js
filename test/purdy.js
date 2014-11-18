@@ -13,6 +13,18 @@ var it = lab.it;
 
 describe('Purdy', function () {
 
+    it('should display an error with detail', function (done) {
+
+        var error = new Error('some bad, bad error');
+        error.withKey = 'key';
+        var obj = {
+            theError: error
+        };
+        var out = Purdy.stringify(obj);
+        expect(out).to.equal('{\n    \u001b[1m\u001b[37mtheError\u001b[39m\u001b[22m: { \u001b[31m[Error: some bad, bad error]\u001b[39m\n        \u001b[1m\u001b[37mwithKey\u001b[39m\u001b[22m: \u001b[33m\'key\'\u001b[39m\n    }\n}');
+        done();
+    });
+
     it('should indent array correctly', function (done) {
 
         var out = Purdy.stringify([1, 2, 1, 1, 1, 1, 12, [1, 2]]);
