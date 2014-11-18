@@ -38,68 +38,30 @@ writeLog(purdyString);
 ### Examples
 
 ````javascript
-// var circularObj = { };
-// circularObj.a = circularObj;
-// var circ = [];
-// circ.push(circ);
-// Purdy({
-//     a: 3,
-//     bn: 'foo',
-//     raino: it,
-//     d: {king: 'cobra'},
-//     null: null,
-//     undefined: undefined,
-//     regexp: new RegExp,
-//     falseBool: false,
-//     trueBool: true,
-//     emptyArr: [],
-//     circular: circularObj,
-//     circularArr: circ
-// });
-
-{
-              a: 3,
-             bn: 'foo',
-          raino: [Function: ?],
-              d: {
-        king: 'cobra'
-    },
-           null: null,
-      undefined: undefined,
-         regexp: /(?:)/,
-      falseBool: false,
-       trueBool: true,
-       emptyArr: [],
-       circular: {
-        a: [Circular]
-    },
-    circularArr: [
-        [0] [Circular]
-    ]
-}
+var Purdy = require('./');
+var circularObj = { };
+circularObj.a = circularObj;
+Purdy({
+    integer: Date.now(),
+    string: 'foo',
+    anonymous: Purdy,
+    defined: function Yes() {},
+    nested: {hello: 'hapi'},
+    error: new Error('bad'),
+    null: null,
+    undefined: undefined,
+    regexp: new RegExp,
+    falseBool: false,
+    trueBool: true,
+    emptyArr: [],
+    circular: circularObj,
+    date: new Date(),
+    arrayWithVisibleIndex: [ 'one', 'two', 'three' ]
+});
 ```
 
-```javascript
-// Purdy([1,2,'foo', it, Array.isArray, new Date,1,1,1,1,12,[1,2]]);
+![image](https://github.com/danielb2/purdy/raw/master/example.png)
 
-[
-    [ 0] 1,
-    [ 1] 2,
-    [ 2] 'foo',
-    [ 3] [Function: ?],
-    [ 4] [Function: isArray],
-    [ 5] Tue May 06 2014 20:49:29 GMT-0700 (PDT),
-    [ 6] 1,
-    [ 7] 1,
-    [ 8] 1,
-    [ 9] 1,
-    [10] 12,
-    [11] [
-        [0] 1,
-        [1] 2
-    ]
-]
-```
 
 ``` javascript
 // var obj = {
