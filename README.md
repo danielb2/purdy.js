@@ -38,7 +38,7 @@ writeLog(purdyString);
 ### Examples
 
 ``` javascript
-var Purdy = require('./');
+var Purdy = require('purdy');
 var circularObj = { };
 circularObj.a = circularObj;
 Purdy({
