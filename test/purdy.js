@@ -243,5 +243,18 @@ describe('Purdy', function () {
         expect(out).to.equal('{\n    longthing: 3,\n            a: 1,\n            b: 1,\n            c: 1\n}');
         done();
     });
+
+    it('prints directly to console', function (done) {
+
+        var stdout = process.stdout.write;
+        var out = '';
+        process.stdout.write = function (str) {
+            out += str;
+        };
+        Purdy('hello', { plain: true });
+        process.stdout.write = stdout;
+        expect(out).to.equal('\'hello\'\n');
+        done();
+    });
 });
 
