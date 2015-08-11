@@ -1,14 +1,16 @@
+var Code = require('code');
 var Hoek = require('hoek');
 var Lab = require('lab');
 var Purdy = require('../');
 
-
 // Test shortcuts
 
 var lab = exports.lab = Lab.script();
-var expect = Lab.expect;
 var describe = lab.describe;
 var it = lab.it;
+var expect = Code.expect;
+var before = lab.before;
+var after = lab.after;
 
 
 describe('Purdy', function () {
@@ -62,6 +64,7 @@ describe('Purdy', function () {
     });
 
     it('should handle circular references', function (done) {
+
         var circularObj = { };
         circularObj.a = circularObj;
         var circ = [];
@@ -219,11 +222,11 @@ describe('Purdy', function () {
 
     it('indents object the way it should', function (done) {
 
-        var obj  = {
+        var obj = {
             a: 2323
         };
 
-        var out = Purdy.stringify(obj, { arrayIndex: false, plain: true })
+        var out = Purdy.stringify(obj, { arrayIndex: false, plain: true });
         expect(out).to.equal('{\n    a: 2323\n}');
         done();
     });
@@ -234,12 +237,12 @@ describe('Purdy', function () {
             longthing: 3,
             a: 1,
             b: 1,
-            c: 1,
+            c: 1
         };
 
-        var out = Purdy.stringify(obj, { arrayIndex: false, plain: true, align: 'left' })
+        var out = Purdy.stringify(obj, { arrayIndex: false, plain: true, align: 'left' });
         expect(out).to.equal('{\n    longthing: 3,\n    a: 1,\n    b: 1,\n    c: 1\n}');
-        out = Purdy.stringify(obj, { arrayIndex: false, plain: true, align: 'right' })
+        out = Purdy.stringify(obj, { arrayIndex: false, plain: true, align: 'right' });
         expect(out).to.equal('{\n    longthing: 3,\n            a: 1,\n            b: 1,\n            c: 1\n}');
         done();
     });
@@ -249,6 +252,7 @@ describe('Purdy', function () {
         var stdout = process.stdout.write;
         var out = '';
         process.stdout.write = function (str) {
+
             out += str;
         };
         Purdy('hello', { plain: true });
@@ -261,13 +265,13 @@ describe('Purdy', function () {
 
         var blah = Symbol();
 
-        var obj  = {
+        var obj = {
             a: 2323
         };
 
         obj[blah] = 'symbol';
 
-        var out = Purdy.stringify(obj, { arrayIndex: false, plain: true })
+        var out = Purdy.stringify(obj, { arrayIndex: false, plain: true });
         expect(out).to.equal('{\n    a: 2323,\n    Symbol(): \'symbol\'\n}');
         done();
     });
