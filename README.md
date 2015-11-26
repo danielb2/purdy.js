@@ -104,6 +104,11 @@ Purdy({
 This package also installs the `purdy` CLI tool. Right now this just prints
 any JSON file with default options.
 
+`purdy package.json` will, for example, print the JSON contents of
+package.json.
+
+Similarly, `cat package.json | purdy -`  will use stdin to print the contents.
+
 
 ## Acknowledgements
 * Michael Dvorkin for [Awesome Print]
