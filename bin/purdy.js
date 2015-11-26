@@ -28,6 +28,7 @@ internals.parse = function (str) {
     }
     catch (e) {
         Purdy(e);
+        process.exit(1);
     }
 };
 
@@ -51,6 +52,7 @@ internals.main = function () {
     }
     catch (e) {
         Purdy(e);
+        process.exit(1);
     }
 };
 
