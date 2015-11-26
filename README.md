@@ -99,6 +99,10 @@ Purdy({
 
 ```
 
+### Command-line Interface
+
+This package also installs the `purdy` CLI tool. Right now this just prints
+any JSON file with default options.
 
 
 ## Acknowledgements
