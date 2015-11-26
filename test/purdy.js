@@ -85,7 +85,8 @@ describe('Purdy', function () {
 
     it('should print an anonymous function', function (done) {
 
-        var out = Purdy.stringify(it);
+        var anon = function () {};
+        var out = Purdy.stringify(anon);
         expect(out).to.equal('\u001b[36m\u001b[36m[Function: ?]\u001b[39m\u001b[39m');
         done();
     });
