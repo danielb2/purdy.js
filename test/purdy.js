@@ -56,6 +56,18 @@ describe('Purdy', function () {
         done();
     });
 
+    it('prints arguments function', function (done) {
+
+        var afunc = function () {
+
+            var out = Purdy.stringify(arguments, { plain: true, arrayIndex: false, indent: 2 });
+            expect(out).to.equal('[\n  \'hello\',\n  \'purdy\'\n]');
+            done();
+        };
+
+        afunc('hello', 'purdy');
+    });
+
     it('should print plain', function (done) {
 
         var out = Purdy.stringify('plain', { plain: true });
