@@ -288,5 +288,18 @@ describe('Purdy', function () {
         expect(out).to.equal('{\n    a: 2323,\n    Symbol(): \'symbol\'\n}');
         done();
     });
+
+    it('prints only symbols', { skip: Object.getOwnPropertySymbols === undefined }, function (done) {
+
+        var blah = Symbol('blah');
+
+        var obj = {};
+
+        obj[blah] = 'symbol';
+
+        var out = Purdy.stringify(obj, { arrayIndex: false, plain: true });
+        expect(out).to.equal('{\n    Symbol(blah): \'symbol\'\n}');
+        done();
+    });
 });
 
