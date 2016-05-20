@@ -4,7 +4,7 @@
   "description": "pretty print objects in real purdy colors. Allows clearer visualization of objects than you get from most pretty printers due to colors. It will also print out the complete path to an object, something that's extremly useful for debugging. Purdy will also print out the path to access a variable using Hoek format making it useful on accessing values.",
   "main": "lib/index.js",
   "scripts": {
-    "test": "lab -a code -t 98 -r html -o coverage.html -r console -o stdout -v"
+    "test": "lab -a code -t 99 -r html -o coverage.html -r console -o stdout -v"
   },
   "homepage": "https://github.com/danielb2/purdy.js",
   "bugs": "https://github.com/danielb2/purdy.js/issues",

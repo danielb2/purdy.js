@@ -23,6 +23,7 @@ you're dealing with.
     * `arrayIndex` - enables index printing for arrays. default: `true`
     * `indent` - defines the number of spaces to indent default: `4`
     * `align` - determines how to align object keys. default: `left`
+    * `depth` - tells purdy how many times to recurse while formatting the object. This is useful for viewing complicated objects. default: `2`. Set to `null` to recurse indefinitely
 
 
 ### `Purdy.stringify(object, [options])`
