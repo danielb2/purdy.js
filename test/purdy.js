@@ -30,7 +30,7 @@ describe('Purdy', function () {
         var obj = {
             theError: error
         };
-        var out = Purdy.stringify(obj);
+        var out = Purdy.stringify(obj, { depth: null });
         expect(out).to.equal('{\n    \u001b[1m\u001b[37mtheError\u001b[39m\u001b[22m: { \u001b[31m[Error: some bad, bad error]\u001b[39m\n        \u001b[1m\u001b[37mwithKey\u001b[39m\u001b[22m: \u001b[33m\'key\'\u001b[39m\n    }\n}');
         done();
     });
@@ -60,7 +60,7 @@ describe('Purdy', function () {
 
         var afunc = function () {
 
-            var out = Purdy.stringify(arguments, { plain: true, arrayIndex: false, indent: 2 });
+            var out = Purdy.stringify(arguments, { depth: null, plain: true, arrayIndex: false, indent: 2 });
             expect(out).to.equal('[\n  \'hello\',\n  \'purdy\'\n]');
             done();
         };
@@ -227,7 +227,7 @@ describe('Purdy', function () {
         };
         var orig = Hoek.clone(obj);
 
-        var out = Purdy.stringify(obj, { plain: false, path: true, align: 'right' });
+        var out = Purdy.stringify(obj, { plain: false, path: true, align: 'right', depth: null });
         expect(out).to.equal('{\n    \u001b[1m\u001b[37mtravel\u001b[39m\u001b[22m: {\n        \u001b[34m// \u001b[39m\u001b[34mtravel.down\u001b[39m\n        \u001b[1m\u001b[37mdown\u001b[39m\u001b[22m: {\n            \u001b[34m// \u001b[39m\u001b[34mtravel.down.a\u001b[39m\n            \u001b[1m\u001b[37m  a\u001b[39m\u001b[22m: [\n                \u001b[34m// \u001b[39m\u001b[34mtravel.down.a.0\u001b[39m\n                [\u001b[1m\u001b[37m0\u001b[39m\u001b[22m] {\n                    \u001b[34m// \u001b[39m\u001b[34mtravel.down.a.0.path\u001b[39m\n                    \u001b[1m\u001b[37mpath\u001b[39m\u001b[22m: \u001b[33m\'to get here\'\u001b[39m\n                }\n            ]\n        }\n    }\n}');
         expect(obj).to.deep.equal(orig);
         done();
@@ -299,6 +299,85 @@ describe('Purdy', function () {
 
         var out = Purdy.stringify(obj, { arrayIndex: false, plain: true });
         expect(out).to.equal('{\n    Symbol(blah): \'symbol\'\n}');
+        done();
+    });
+
+    it('obeys depth printing', function (done) {
+
+        var obj = {
+            count: 1,
+            a: {
+                count: 2,
+                b: {
+                    count: 3,
+                    c: {
+                        count: 4
+                    }
+                }
+            }
+        };
+
+        var out = Purdy.stringify(obj, { depth: 1, arrayIndex: false, plain: true });
+        expect(out).to.equal('{\n    count: 1,\n    a: {\n        count: 2,\n        b: [Object]\n    }\n}');
+        done();
+    });
+
+    it('should handle depth printing for array', function (done) {
+
+        var obj = [[[[[[[[[[]]]]]]]]]];
+
+        var out = Purdy.stringify(obj, { depth: 1, arrayIndex: false, plain: true });
+        expect(out).to.equal('[\n    [\n        [Object]\n    ]\n]');
+        done();
+    });
+
+    it('should print using zero depth', function (done) {
+
+        var obj = [[[[[[[[[[]]]]]]]]]];
+
+        var out = Purdy.stringify(obj, { depth: 0, indent: 1, arrayIndex: false, plain: true });
+        expect(out).to.equal('[\n [Object]\n]');
+        done();
+    });
+
+    it('should handle depth printing for mixed', function (done) {
+
+        var obj = {
+            count: 1,
+            a: {
+                foo: [[[[[[[[[[]]]]]]]]]],
+                count: 2,
+                b: {
+                    count: 3,
+                    c: {
+                        count: 4
+                    }
+                }
+            }
+        };
+
+        var out = Purdy.stringify(obj, { depth: 1, arrayIndex: false, plain: true });
+        expect(out).to.equal('{\n    count: 1,\n    a: {\n        foo: [Object],\n        count: 2,\n        b: [Object]\n    }\n}');
+        done();
+    });
+
+    it('should handle depth printing using null depth', function (done) {
+
+        var obj = {
+            count: 1,
+            a: {
+                count: 2,
+                b: {
+                    count: 3,
+                    c: {
+                        count: 4
+                    }
+                }
+            }
+        };
+
+        var out = Purdy.stringify(obj, { depth: null, arrayIndex: false, plain: true });
+        expect(out).to.equal('{\n    count: 1,\n    a: {\n        count: 2,\n        b: {\n            count: 3,\n            c: {\n                count: 4\n            }\n        }\n    }\n}');
         done();
     });
 });
