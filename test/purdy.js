@@ -23,6 +23,15 @@ describe('Purdy', function () {
         done();
     });
 
+    it('should display an error with properties', function (done) {
+
+        var error = new Error('error with properties');
+        error.code = 'BAD';
+        var out = Purdy.stringify(error);
+        expect(out).to.equal('{ \u001b[31m[Error: error with properties]\u001b[39m\n    \u001b[1m\u001b[37mcode\u001b[39m\u001b[22m: \u001b[33m\'BAD\'\u001b[39m\n}');
+        done();
+    });
+
     it('should display an error with detail', function (done) {
 
         var error = new Error('some bad, bad error');
