@@ -21,10 +21,10 @@ internals.stdin = function(stream, callback){
 };
 
 
-internals.parse = function (str) {
+internals.parse = function (str, depth) {
 
     try {
-        Purdy(JSON.parse(str));
+        Purdy(JSON.parse(str), { depth: depth });
     }
     catch (e) {
         Purdy(e);
@@ -38,6 +38,19 @@ internals.main = function () {
     var stream = process.stdin;
 
     try {
+        var depthIdx = process.argv.indexOf('--depth');
+        var depth = 2;
+        if (depthIdx !== -1) {
+            var pair = process.argv.splice(depthIdx, 2);
+            depth = parseFloat(pair[1]);
+
+            if (String(depth) === 'NaN') {
+                var e = new Error('Depth requires a numerical value');
+                e.depth = pair[1];
+                Purdy(e);
+                process.exit(1);
+            }
+        }
         if (process.argv[2] === '-') {
             stream = process.stdin;
         }
@@ -47,7 +60,7 @@ internals.main = function () {
         }
         internals.stdin(stream, function (str) {
 
-            internals.parse(str);
+            internals.parse(str, depth);
         });
     }
     catch (e) {
