@@ -11,6 +11,8 @@ Print things real purdy for nodejs.
 
 ### `Purdy(object, [options])`
 
+![image](https://github.com/danielb2/purdy/raw/master/example.png)
+
 Prints anything indented, and with arrays with index keys, and different
 types in colors such that it's very easy to get an overview of what object
 you're dealing with.
@@ -38,14 +40,17 @@ writeLog(purdyString);
 
 ### Examples
 
+The following code prints what's in the image above.
+
 ``` javascript
-var Purdy = require('purdy');
+var mises = function mises () { this.moop = 3 }
+var instance = new mises();
 var circularObj = { };
 circularObj.a = circularObj;
-Purdy({
+var obj = {
     integer: Date.now(),
     string: 'foo',
-    anonymous: Purdy,
+    anonPurdy: Purdy,
     defined: function Yes() {},
     nested: {hello: 'hapi'},
     error: new Error('bad'),
@@ -54,51 +59,17 @@ Purdy({
     regexp: new RegExp,
     falseBool: false,
     trueBool: true,
+    symbol: Symbol('purdy'),
     emptyArr: [],
     circular: circularObj,
     date: new Date(),
-    arrayWithVisibleIndex: [ 'one', 'two', 'three' ]
-});
-```
-
-![image](https://github.com/danielb2/purdy/raw/master/example.png)
-
-
-``` javascript
-// var obj = {
-//     travel: {
-//         down: {
-//             a: [{
-//                 path: 'to get here'
-//             }]
-//         }
-//     }
-// Purdy(obj, { path: true });
-
-{
-    travel: {
-        // travel.down
-        down: {
-            // travel.down.a
-              a: [
-                // travel.down.a.0
-                [0] {
-                    // travel.down.a.0.path
-                    path: 'to get here'
-                }
-            ]
-        }
-    }
-}
-
-// var Hoek = require('hoek');
-// Purdy(Hoek.reach(obj, 'travel.down.a.0.path'));
-
-{
-        path: 'to get here'
-}
+    arrayWithVisibleIndex: [ 'one', 'two', 'three' ],
+    instance: instance,
+};
+Purdy(obj);
 
 ```
+
 
 ### Command-line Interface
 
