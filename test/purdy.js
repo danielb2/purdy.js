@@ -112,6 +112,24 @@ describe('Purdy', function () {
 
     describe('functions', function () {
 
+        it('should print constructor name', function (done) {
+
+            var mises = function mises () { this.moop = 3 }
+            var obj = { instance: new mises() };
+            var out = Purdy.stringify(obj, { indent: 1 });
+            expect(out).to.equal('{\n \u001b[1m\u001b[37minstance\u001b[39m\u001b[22m: \u001b[32mmises\u001b[39m {\n  \u001b[1m\u001b[37mmoop\u001b[39m\u001b[22m: \u001b[1m\u001b[34m3\u001b[39m\u001b[22m\n }\n}');
+            done();
+        });
+
+        it('should print not print common constructor', function (done) {
+
+            var mises = function () { this.moop = 3 }
+            var obj = { instance: new mises() };
+            var out = Purdy.stringify(obj, { indent: 1 });
+            expect(out).to.equal('{\n \u001b[1m\u001b[37minstance\u001b[39m\u001b[22m: {\n  \u001b[1m\u001b[37mmoop\u001b[39m\u001b[22m: \u001b[1m\u001b[34m3\u001b[39m\u001b[22m\n }\n}');
+            done();
+        });
+
         it('should print a function', function (done) {
 
             var out = Purdy.stringify(Array.isArray);
