@@ -300,32 +300,68 @@ describe('Purdy', function () {
         done();
     });
 
-    it('prints symbols', { skip: Object.getOwnPropertySymbols === undefined }, function (done) {
+    describe('symbols', function () {
 
-        var blah = Symbol();
+        it('prints symbols', { skip: Object.getOwnPropertySymbols === undefined }, function (done) {
 
-        var obj = {
-            a: 2323
-        };
+            var blah = Symbol();
 
-        obj[blah] = 'symbol';
+            var obj = {
+                a: 2323
+            };
 
-        var out = Purdy.stringify(obj, { arrayIndex: false, plain: true });
-        expect(out).to.equal('{\n    a: 2323,\n    Symbol(): \'symbol\'\n}');
-        done();
-    });
+            obj[blah] = 'symbol';
 
-    it('prints only symbols', { skip: Object.getOwnPropertySymbols === undefined }, function (done) {
+            var out = Purdy.stringify(obj, { arrayIndex: false, plain: true });
+            expect(out).to.equal('{\n    a: 2323,\n    Symbol(): \'symbol\'\n}');
+            done();
+        });
 
-        var blah = Symbol('blah');
+        it('prints only symbols', { skip: Object.getOwnPropertySymbols === undefined }, function (done) {
 
-        var obj = {};
+            var blah = Symbol('blah');
 
-        obj[blah] = 'symbol';
+            var obj = {};
 
-        var out = Purdy.stringify(obj, { arrayIndex: false, plain: true });
-        expect(out).to.equal('{\n    Symbol(blah): \'symbol\'\n}');
-        done();
+            obj[blah] = 'symbol';
+
+            var out = Purdy.stringify(obj, { arrayIndex: false, plain: true });
+            expect(out).to.equal('{\n    Symbol(blah): \'symbol\'\n}');
+            done();
+        });
+
+        describe('100% coverage', function () {
+
+            it('should have coverage for having getOwnPropertySymbols', { skip: !Object.getOwnPropertySymbols }, function (done) {
+
+                var getOwnPropertySymbols = Object.getOwnPropertySymbols;
+                Object.getOwnPropertySymbols = undefined;
+
+                var obj = { a: 3 };
+
+
+                var out = Purdy.stringify(obj, { plain: true });
+                expect(out).to.equal('{\n    a: 3\n}');
+                Object.getOwnPropertySymbols = getOwnPropertySymbols;
+                done();
+            });
+
+            it('should have coverage for not having getOwnPropertySymbols', { skip: !!Object.getOwnPropertySymbols }, function (done) {
+
+                Object.getOwnPropertySymbols = function () {
+
+                    return [];
+                };
+
+                var obj = { a: 3 };
+
+
+                var out = Purdy.stringify(obj, { plain: true });
+                expect(out).to.equal('{\n    a: 3\n}');
+                Object.getOwnPropertySymbols = undefined;
+                done();
+            });
+        });
     });
 
     describe('depth', function () {
