@@ -1,4 +1,4 @@
-# Purdy ![build](https://travis-ci.org/danielb2/purdy.js.svg)
+# Purdy ![build](https://travis-ci.org/danielb2/purdy.js.svg) ![coverage](https://img.shields.io/badge/coverage-100%25-green.svg)
 
 Print things real purdy for nodejs.
 

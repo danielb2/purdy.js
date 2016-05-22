@@ -123,7 +123,7 @@ describe('Purdy', function () {
 
             var anon = function () {};
             var out = Purdy.stringify(anon);
-            expect(out).to.equal('\u001b[36m[Function: ?]\u001b[39m');
+            expect(out).to.equal('\u001b[36m[Function]\u001b[39m');
             done();
         });
 
@@ -134,7 +134,18 @@ describe('Purdy', function () {
             obj.property = 3;
 
             var out = Purdy.stringify(obj, { indent: 1, plain: false });
-            expect(out).to.equal('{ \u001b[36m[Function: ?]\u001b[39m\n \u001b[1m\u001b[37mproperty\u001b[39m\u001b[22m: \u001b[1m\u001b[34m3\u001b[39m\u001b[22m\n}');
+            expect(out).to.equal('{ \u001b[36m[Function]\u001b[39m\n \u001b[1m\u001b[37mproperty\u001b[39m\u001b[22m: \u001b[1m\u001b[34m3\u001b[39m\u001b[22m\n}');
+            done();
+        });
+
+        it('should print properties for functions with name', function (done) {
+
+            var obj = function Liberty () {};
+
+            obj.property = 3;
+
+            var out = Purdy.stringify(obj, { indent: 1, plain: false });
+            expect(out).to.equal('{ \u001b[36m[Function: Liberty]\u001b[39m\n \u001b[1m\u001b[37mproperty\u001b[39m\u001b[22m: \u001b[1m\u001b[34m3\u001b[39m\u001b[22m\n}');
             done();
         });
     });
