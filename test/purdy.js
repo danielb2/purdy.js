@@ -17,11 +17,21 @@ describe('Purdy', function () {
 
     describe('errors', function () {
 
+
         it('should display an error', function (done) {
 
             var error = new Error('plain error');
             var out = Purdy.stringify(error);
             expect(out).to.equal('\u001b[31m[Error: plain error]\u001b[39m');
+            done();
+        });
+
+        it('should display an error with no error message and property correctly', function (done) {
+
+            var error = new Error();
+            error.murray = 'rothbard';
+            var out = Purdy.stringify(error);
+            expect(out).to.equal('{ \u001b[31m[Error]\u001b[39m\n    \u001b[1m\u001b[37mmurray\u001b[39m\u001b[22m: \u001b[33m\'rothbard\'\u001b[39m\n}');
             done();
         });
 
