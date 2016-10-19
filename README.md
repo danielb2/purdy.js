@@ -81,6 +81,26 @@ package.json.
 
 Similarly, `cat package.json | purdy -`  will use stdin to print the contents.
 
+### Replace Global `console.log` (use with caution)
+
+If one would like,
+in a certain Node.js process,
+to have `console.log` replaced by `purdy`,
+one could do
+
+``` js
+require('purdy/replace')
+```
+
+Or
+
+``` sh
+$ node --require purdy/replace [rest of the arguments]
+```
+
+See
+[`$node --require`](https://nodejs.org/api/cli.html#cli_r_require_module).
+
 
 ## Acknowledgements
 * Michael Dvorkin for [Awesome Print]
