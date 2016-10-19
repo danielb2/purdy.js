@@ -81,6 +81,9 @@ package.json.
 
 Similarly, `cat package.json | purdy -`  will use stdin to print the contents.
 
+## Contributing
+
+This project adheres to the [hapi styleguide](https://github.com/hapijs/contrib/blob/master/Style.md).
 
 ## Acknowledgements
 * Michael Dvorkin for [Awesome Print]
