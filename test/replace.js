@@ -14,6 +14,6 @@ describe('replace', function () {
     lab.it('should replace `console.log` with purdy', function (done) {
         require('../replace');
         expect(console.log).to.equal(Purdy);
-        done()
+        done();
     });
 })
