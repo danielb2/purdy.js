@@ -145,7 +145,12 @@ describe('Purdy', function () {
 
             var anon = function () {};
             var out = Purdy.stringify(anon);
-            expect(out).to.equal('\u001b[36m[Function]\u001b[39m');
+            var expected = [
+                '\u001b[36m[Function',
+                funcNameInfer ? ': anon' : '',
+                ']\u001b[39m'
+            ].join('');
+            expect(out).to.equal(expected);
             done();
         });
 
