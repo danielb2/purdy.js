@@ -166,7 +166,12 @@ describe('Purdy', function () {
             obj.property = 3;
 
             var out = Purdy.stringify(obj, { indent: 1, plain: false });
-            expect(out).to.equal('{ \u001b[36m[Function]\u001b[39m\n \u001b[1m\u001b[37mproperty\u001b[39m\u001b[22m: \u001b[1m\u001b[34m3\u001b[39m\u001b[22m\n}');
+            var expected = [
+                '{ \u001b[36m[Function',
+                funcNameInfer ? ': obj': '',
+                ']\u001b[39m\n \u001b[1m\u001b[37mproperty\u001b[39m\u001b[22m: \u001b[1m\u001b[34m3\u001b[39m\u001b[22m\n}'
+            ].join('');
+            expect(out).to.equal(expected);
             done();
         });
 
