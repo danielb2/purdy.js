@@ -12,6 +12,10 @@ var expect = Code.expect;
 var before = lab.before;
 var after = lab.after;
 
+// Check for ES2015 function name inference
+
+var funcNameInfer = (function funcName () {}).name === 'funcName';
+
 
 describe('Purdy', function () {
 
@@ -126,7 +130,12 @@ describe('Purdy', function () {
             var mises = function () { this.moop = 3 }
             var obj = { instance: new mises() };
             var out = Purdy.stringify(obj, { indent: 1 });
-            expect(out).to.equal('{\n \u001b[1m\u001b[37minstance\u001b[39m\u001b[22m: {\n  \u001b[1m\u001b[37mmoop\u001b[39m\u001b[22m: \u001b[1m\u001b[34m3\u001b[39m\u001b[22m\n }\n}');
+            var expected = [
+                '{\n \u001b[1m\u001b[37minstance\u001b[39m\u001b[22m: ',
+                funcNameInfer ? '\u001b[32mmises\u001b[39m ' : '',
+                '{\n  \u001b[1m\u001b[37mmoop\u001b[39m\u001b[22m: \u001b[1m\u001b[34m3\u001b[39m\u001b[22m\n }\n}'
+            ].join('');
+            expect(out).to.equal(expected);
             done();
         });
 
@@ -141,7 +150,12 @@ describe('Purdy', function () {
 
             var anon = function () {};
             var out = Purdy.stringify(anon);
-            expect(out).to.equal('\u001b[36m[Function]\u001b[39m');
+            var expected = [
+                '\u001b[36m[Function',
+                funcNameInfer ? ': anon' : '',
+                ']\u001b[39m'
+            ].join('');
+            expect(out).to.equal(expected);
             done();
         });
 
@@ -152,7 +166,12 @@ describe('Purdy', function () {
             obj.property = 3;
 
             var out = Purdy.stringify(obj, { indent: 1, plain: false });
-            expect(out).to.equal('{ \u001b[36m[Function]\u001b[39m\n \u001b[1m\u001b[37mproperty\u001b[39m\u001b[22m: \u001b[1m\u001b[34m3\u001b[39m\u001b[22m\n}');
+            var expected = [
+                '{ \u001b[36m[Function',
+                funcNameInfer ? ': obj': '',
+                ']\u001b[39m\n \u001b[1m\u001b[37mproperty\u001b[39m\u001b[22m: \u001b[1m\u001b[34m3\u001b[39m\u001b[22m\n}'
+            ].join('');
+            expect(out).to.equal(expected);
             done();
         });
 
