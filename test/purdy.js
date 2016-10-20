@@ -14,7 +14,8 @@ var after = lab.after;
 
 // Check for ES2015 function name inference
 
-var funcNameInfer = (function funcName () {}).name === 'funcName';
+var funcName = function () {};
+var funcNameInfer = funcName.name === 'funcName';
 
 
 describe('Purdy', function () {
