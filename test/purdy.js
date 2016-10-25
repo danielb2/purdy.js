@@ -17,6 +17,13 @@ var after = lab.after;
 var funcName = function () {};
 var funcNameInfer = funcName.name === 'funcName';
 
+// For test coverage in engines where
+// function name inference is not available
+if (funcNameInfer) {
+    var someFunc = function () {};
+    delete someFunc.name;
+    Purdy.stringify(someFunc);
+}
 
 describe('Purdy', function () {
 
