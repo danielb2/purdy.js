@@ -27,6 +27,10 @@
   },
   "devDependencies": {
     "code": "1.x.x",
+    "eslint": "^3.8.1",
+    "eslint-config-standard": "^6.2.1",
+    "eslint-plugin-promise": "^3.3.0",
+    "eslint-plugin-standard": "^2.0.1",
     "lab": "6.x.x"
   },
   "dependencies": {
