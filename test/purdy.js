@@ -138,11 +138,8 @@ describe('Purdy', function () {
             var mises = function () { this.moop = 3 }
             var obj = { instance: new mises() };
             var out = Purdy.stringify(obj, { indent: 1 });
-            var expected = [
-                '{\n \u001b[1m\u001b[37minstance\u001b[39m\u001b[22m: ',
-                funcNameInfer ? '\u001b[32mmises\u001b[39m ' : '',
-                '{\n  \u001b[1m\u001b[37mmoop\u001b[39m\u001b[22m: \u001b[1m\u001b[34m3\u001b[39m\u001b[22m\n }\n}'
-            ].join('');
+            var inferred = funcNameInfer ? '\u001b[32mmises\u001b[39m ' : '';
+            var expected = '{\n \u001b[1m\u001b[37minstance\u001b[39m\u001b[22m: ' + inferred + '{\n  \u001b[1m\u001b[37mmoop\u001b[39m\u001b[22m: \u001b[1m\u001b[34m3\u001b[39m\u001b[22m\n }\n}';
             expect(out).to.equal(expected);
             done();
         });
@@ -158,11 +155,8 @@ describe('Purdy', function () {
 
             var anon = function () {};
             var out = Purdy.stringify(anon);
-            var expected = [
-                '\u001b[36m[Function',
-                funcNameInfer ? ': anon' : '',
-                ']\u001b[39m'
-            ].join('');
+            var inferred = funcNameInfer ? ': anon' : '';
+            var expected = '\u001b[36m[Function' + inferred + ']\u001b[39m';
             expect(out).to.equal(expected);
             done();
         });
@@ -174,11 +168,8 @@ describe('Purdy', function () {
             obj.property = 3;
 
             var out = Purdy.stringify(obj, { indent: 1, plain: false });
-            var expected = [
-                '{ \u001b[36m[Function',
-                funcNameInfer ? ': obj': '',
-                ']\u001b[39m\n \u001b[1m\u001b[37mproperty\u001b[39m\u001b[22m: \u001b[1m\u001b[34m3\u001b[39m\u001b[22m\n}'
-            ].join('');
+            var inferred = funcNameInfer ? ': obj': '';
+            var expected = '{ \u001b[36m[Function' + inferred + ']\u001b[39m\n \u001b[1m\u001b[37mproperty\u001b[39m\u001b[22m: \u001b[1m\u001b[34m3\u001b[39m\u001b[22m\n}';
             expect(out).to.equal(expected);
             done();
         });
