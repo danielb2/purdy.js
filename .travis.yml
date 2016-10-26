@@ -5,3 +5,9 @@ node_js:
   - 0.12
   - 4
   - 6
+
+env:
+  - JOB=lint
+  - JOB=unit
+
+script: npm run $JOB
