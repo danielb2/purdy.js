@@ -4,7 +4,9 @@
   "description": "Pretty print objects in real purdy colors. Allows clearer visualization of objects than you get from most pretty printers due to colors. It will also print out the complete path to an object, something that's extremly useful for debugging. Purdy will also print out the path to access a variable using Hoek format making it useful on accessing values.",
   "main": "lib/index.js",
   "scripts": {
-    "test": "lab -a code -t 100 -v -I Reflect"
+    "lint": "eslint .",
+    "unit": "lab -a code -t 100 -v -I Reflect",
+    "test": "npm run lint && npm run unit"
   },
   "homepage": "https://github.com/danielb2/purdy.js",
   "bugs": "https://github.com/danielb2/purdy.js/issues",
@@ -27,6 +29,10 @@
   },
   "devDependencies": {
     "code": "1.x.x",
+    "eslint": "^3.8.1",
+    "eslint-config-standard": "^6.2.1",
+    "eslint-plugin-promise": "^3.3.0",
+    "eslint-plugin-standard": "^2.0.1",
     "lab": "6.x.x"
   },
   "dependencies": {
