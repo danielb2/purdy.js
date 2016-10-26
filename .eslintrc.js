@@ -7,7 +7,6 @@ module.exports = {
     "rules": {
         "brace-style": "off",
         "indent": "off",
-        "new-cap": "off",
         "no-multi-spaces": "off",
         "no-multiple-empty-lines": "off",
         "no-unused-vars": "off",

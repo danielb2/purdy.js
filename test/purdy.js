@@ -126,8 +126,8 @@ describe('Purdy', function () {
 
         it('should print constructor name', function (done) {
 
-            var mises = function mises () { this.moop = 3 }
-            var obj = { instance: new mises() };
+            var Mises = function mises () { this.moop = 3 }
+            var obj = { instance: new Mises() };
             var out = Purdy.stringify(obj, { indent: 1 });
             expect(out).to.equal('{\n \u001b[1m\u001b[37minstance\u001b[39m\u001b[22m: \u001b[32mmises\u001b[39m {\n  \u001b[1m\u001b[37mmoop\u001b[39m\u001b[22m: \u001b[1m\u001b[34m3\u001b[39m\u001b[22m\n }\n}');
             done();
@@ -135,10 +135,10 @@ describe('Purdy', function () {
 
         it('should print not print common constructor', function (done) {
 
-            var mises = function () { this.moop = 3 }
-            var obj = { instance: new mises() };
+            var Mises = function () { this.moop = 3 }
+            var obj = { instance: new Mises() };
             var out = Purdy.stringify(obj, { indent: 1 });
-            var inferred = funcNameInfer ? '\u001b[32mmises\u001b[39m ' : '';
+            var inferred = funcNameInfer ? '\u001b[32mMises\u001b[39m ' : '';
             var expected = '{\n \u001b[1m\u001b[37minstance\u001b[39m\u001b[22m: ' + inferred + '{\n  \u001b[1m\u001b[37mmoop\u001b[39m\u001b[22m: \u001b[1m\u001b[34m3\u001b[39m\u001b[22m\n }\n}';
             expect(out).to.equal(expected);
             done();
