@@ -12,6 +12,18 @@ var expect = Code.expect;
 var before = lab.before;
 var after = lab.after;
 
+// Check for ES2015 function name inference
+
+var funcName = function () {};
+var funcNameInfer = funcName.name === 'funcName';
+
+// For test coverage in engines where
+// function name inference is not available
+if (funcNameInfer) {
+    var someFunc = function () {};
+    delete someFunc.name;
+    Purdy.stringify(someFunc);
+}
 
 describe('Purdy', function () {
 
@@ -126,7 +138,9 @@ describe('Purdy', function () {
             var mises = function () { this.moop = 3 }
             var obj = { instance: new mises() };
             var out = Purdy.stringify(obj, { indent: 1 });
-            expect(out).to.equal('{\n \u001b[1m\u001b[37minstance\u001b[39m\u001b[22m: {\n  \u001b[1m\u001b[37mmoop\u001b[39m\u001b[22m: \u001b[1m\u001b[34m3\u001b[39m\u001b[22m\n }\n}');
+            var inferred = funcNameInfer ? '\u001b[32mmises\u001b[39m ' : '';
+            var expected = '{\n \u001b[1m\u001b[37minstance\u001b[39m\u001b[22m: ' + inferred + '{\n  \u001b[1m\u001b[37mmoop\u001b[39m\u001b[22m: \u001b[1m\u001b[34m3\u001b[39m\u001b[22m\n }\n}';
+            expect(out).to.equal(expected);
             done();
         });
 
@@ -141,7 +155,9 @@ describe('Purdy', function () {
 
             var anon = function () {};
             var out = Purdy.stringify(anon);
-            expect(out).to.equal('\u001b[36m[Function]\u001b[39m');
+            var inferred = funcNameInfer ? ': anon' : '';
+            var expected = '\u001b[36m[Function' + inferred + ']\u001b[39m';
+            expect(out).to.equal(expected);
             done();
         });
 
@@ -152,7 +168,9 @@ describe('Purdy', function () {
             obj.property = 3;
 
             var out = Purdy.stringify(obj, { indent: 1, plain: false });
-            expect(out).to.equal('{ \u001b[36m[Function]\u001b[39m\n \u001b[1m\u001b[37mproperty\u001b[39m\u001b[22m: \u001b[1m\u001b[34m3\u001b[39m\u001b[22m\n}');
+            var inferred = funcNameInfer ? ': obj': '';
+            var expected = '{ \u001b[36m[Function' + inferred + ']\u001b[39m\n \u001b[1m\u001b[37mproperty\u001b[39m\u001b[22m: \u001b[1m\u001b[34m3\u001b[39m\u001b[22m\n}';
+            expect(out).to.equal(expected);
             done();
         });
 
