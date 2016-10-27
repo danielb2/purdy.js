@@ -17,14 +17,6 @@ var after = lab.after;
 var funcName = function () {};
 var funcNameInfer = funcName.name === 'funcName';
 
-// For test coverage in engines where
-// function name inference is not available
-if (funcNameInfer) {
-    var someFunc = function () {};
-    delete someFunc.name;
-    Purdy.stringify(someFunc);
-}
-
 describe('Purdy', function () {
 
     describe('errors', function () {
@@ -154,9 +146,9 @@ describe('Purdy', function () {
         it('should print an anonymous function', function (done) {
 
             var anon = function () {};
+            delete anon.name;
             var out = Purdy.stringify(anon);
-            var inferred = funcNameInfer ? ': anon' : '';
-            var expected = '\u001b[36m[Function' + inferred + ']\u001b[39m';
+            var expected = '\u001b[36m[Function]\u001b[39m';
             expect(out).to.equal(expected);
             done();
         });
