@@ -145,9 +145,7 @@ describe('Purdy', function () {
 
         it('should print an anonymous function', function (done) {
 
-            var anon = function () {};
-            delete anon.name;
-            var out = Purdy.stringify(anon);
+            var out = Purdy.stringify(function () {});
             var expected = '\u001b[36m[Function]\u001b[39m';
             expect(out).to.equal(expected);
             done();
