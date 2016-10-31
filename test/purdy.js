@@ -151,9 +151,7 @@ describe('Purdy', () => {
 
         it('should print an anonymous function', (done) => {
 
-            const anon = function () {};
-            delete anon.name;
-            const out = Purdy.stringify(anon);
+            const out = Purdy.stringify(function () {});
             const expected = '\u001b[36m[Function]\u001b[39m';
             expect(out).to.equal(expected);
             done();
