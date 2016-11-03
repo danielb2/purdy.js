@@ -5,7 +5,7 @@ Print things real purdy for nodejs.
 ## Usage
 
 ```javascript
-    var Purdy = require('purdy');
+    const Purdy = require('purdy');
     Purdy({list: [1,2,3], string: 'some string'});
 ```
 
@@ -34,7 +34,7 @@ This function returns a string without printing it to stdout. This may prove
 to be useful for log files other other applications.
 
 ``` javascript
-var purdyString = Purdy.stringify({a: 'b'}, {plain: true});
+const purdyString = Purdy.stringify({a: 'b'}, {plain: true});
 writeLog(purdyString);
 ```
 
@@ -43,11 +43,11 @@ writeLog(purdyString);
 The following code prints what's in the image above.
 
 ``` javascript
-var mises = function mises () { this.moop = 3 }
-var instance = new mises();
-var circularObj = { };
+const mises = function mises () { this.moop = 3 }
+const instance = new mises();
+const circularObj = { };
 circularObj.a = circularObj;
-var obj = {
+const obj = {
     integer: Date.now(),
     string: 'foo',
     anonPurdy: Purdy,
