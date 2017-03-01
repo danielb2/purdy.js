@@ -21,7 +21,6 @@ describe('Purdy', () => {
 
     describe('errors', () => {
 
-
         it('should display an error', (done) => {
 
             const error = new Error('plain error');
@@ -59,6 +58,13 @@ describe('Purdy', () => {
             expect(out).to.equal('{\n    \u001b[1m\u001b[37mtheError\u001b[39m\u001b[22m: { \u001b[31m[Error: some bad, bad error]\u001b[39m\n        \u001b[1m\u001b[37mwithKey\u001b[39m\u001b[22m: \u001b[33m\'key\'\u001b[39m\n    }\n}');
             done();
         });
+    });
+
+    it('should print an object without a constructor', (done) => {
+
+        const out = Purdy.stringify({ constructor: null });
+        expect(out).to.equal('{\n    \u001b[1m\u001b[37mconstructor\u001b[39m\u001b[22m: \u001b[1m\u001b[31mnull\u001b[39m\u001b[22m\n}');
+        done();
     });
 
     it('should indent array correctly', (done) => {
