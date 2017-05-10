@@ -124,7 +124,7 @@ describe('Purdy', () => {
 
         it('should print constructor name', (done) => {
 
-            const mises = function mises() {
+            const mises = function mises () {
 
                 this.moop = 3;
             };
@@ -157,7 +157,7 @@ describe('Purdy', () => {
 
         it('should print an anonymous function', (done) => {
 
-            const out = Purdy.stringify(function () {});
+            const out = Purdy.stringify(() => {});
             const expected = '\u001b[36m[Function]\u001b[39m';
             expect(out).to.equal(expected);
             done();
@@ -178,7 +178,7 @@ describe('Purdy', () => {
 
         it('should print properties for functions with name', (done) => {
 
-            const obj = function Liberty() {};
+            const obj = function Liberty () {};
 
             obj.property = 3;
 
