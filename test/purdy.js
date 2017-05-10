@@ -19,6 +19,65 @@ const funcNameInfer = funcName.name === 'funcName';
 
 describe('Purdy', () => {
 
+    describe('Promise', () => {
+
+        it('should print promise with unknown state such as a non-native lib. like bluebird', (done) => {
+
+            const P = function Promise () {
+
+                this.then = () => {},
+                this.catch = () => {};
+            };
+            const promise = new P();
+            const out = Purdy.stringify(promise);
+            expect(out).to.equal('{ \u001b[36m[Promise: unknown]\u001b[39m\n    \u001b[1m\u001b[37mthen\u001b[39m\u001b[22m: \u001b[36m[Function]\u001b[39m,\n    \u001b[1m\u001b[37mcatch\u001b[39m\u001b[22m: \u001b[36m[Function]\u001b[39m\n}');
+            done();
+        });
+
+        it('reject a fake promise', (done) => {
+
+            const promise = { then: () => {}, catch: () => {} };
+            const out = Purdy.stringify(promise);
+            expect(out).to.not.match(/Promise/);
+            done();
+        });
+
+        it('should pretty print a pending promise', (done) => {
+
+            const promise = new Promise(() => {});
+            const out = Purdy.stringify(promise);
+            expect(out).to.equal('\u001b[36m[Promise: pending]\u001b[39m');
+            done();
+        });
+
+        it('should pretty print a fulfilled promise', (done) => {
+
+            const promise = Promise.resolve();
+            const out = Purdy.stringify({ promise });
+            expect(out).to.equal('{\n    \u001b[1m\u001b[37mpromise\u001b[39m\u001b[22m: \u001b[32m[Promise: fulfilled]\u001b[39m\n}');
+            done();
+        });
+
+        it('should pretty print a rejected promise', (done) => {
+
+            const promise = Promise.reject();
+            promise.catch(() => {});
+            const out = Purdy.stringify(promise);
+            expect(out).to.equal('\u001b[31m[Promise: rejected]\u001b[39m');
+            done();
+        });
+
+        it('should pretty print a rejected promise with properties', (done) => {
+
+            const promise = Promise.reject();
+            promise.fail = true;
+            promise.catch(() => {});
+            const out = Purdy.stringify(promise);
+            expect(out).to.equal('{ \u001b[31m[Promise: rejected]\u001b[39m\n    \u001b[1m\u001b[37mfail\u001b[39m\u001b[22m: \u001b[1m\u001b[32mtrue\u001b[39m\u001b[22m\n}');
+            done();
+        });
+    });
+
     describe('errors', () => {
 
         it('should display an error', (done) => {
