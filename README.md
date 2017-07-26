@@ -79,7 +79,11 @@ any JSON file with default options.
 `purdy package.json` will, for example, print the JSON contents of
 package.json.
 
-Similarly, `cat package.json | purdy -`  will use stdin to print the contents.
+Similarly, `cat package.json | purdy -s`  will use stdin to print the contents.
+
+A new option `-l` has been added to parse log files that has one JSON string per line in the file.
+
+`purdy -l logfile.log` will print that.
 
 ## Contributing
 
