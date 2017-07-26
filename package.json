@@ -30,6 +30,7 @@
     "lab": "6.x.x"
   },
   "dependencies": {
+    "bossy": "^3.0.4",
     "chalk": "0.4.x",
     "hoek": "2.x.x",
     "joi": "6.x.x"

@@ -1,14 +1,59 @@
 #!/usr/bin/env node
 'use strict';
 
+const Bossy = require('bossy');
 const Fs = require('fs');
 const Purdy = require('../');
+const ReadLine = require('readline');
 
 
-const internals = {};
+const internals = {
+    definition: {
+        h: {
+            alias: 'help',
+            description: 'Show help',
+            type: 'boolean'
+        },
+        d: {
+            alias: 'depth',
+            description: 'depth to show',
+            default: 2,
+            type: 'number'
+        },
+        's': {
+            alias: 'stdin',
+            description: 'parse from stdin',
+            type: 'boolean'
+        },
+        'l': {
+            alias: 'log',
+            description: 'file is in log format with one JSON string per line',
+            type: 'boolean'
+        }
+    }
+};
 
 
-internals.stdin = function (stream, callback){
+internals.initalizeBossy = function () {
+
+    const args = Bossy.parse(internals.definition);
+
+    if (args instanceof Error) {
+        console.error(args.message);
+        process.exit(1);
+    }
+
+    if (args.h) {
+        console.log(Bossy.usage(internals.definition, 'node start.js'));
+        process.exit(0);
+    }
+
+    return args;
+};
+
+
+
+internals.parseStream = function (stream){
 
     let buf = '';
     stream.setEncoding('utf8');
@@ -20,20 +65,48 @@ internals.stdin = function (stream, callback){
 
     stream.on('end', () => {
 
-        callback(buf);
+        try {
+            internals.parse(buf);
+        }
+        catch (e) {
+            internals.error(e);
+        }
     }).resume();
 };
 
 
-internals.parse = function (str, depth) {
+internals.logparse = function (stream){
 
-    try {
-        Purdy(JSON.parse(str), { depth });
-    }
-    catch (e) {
-        Purdy(e);
-        process.exit(1);
-    }
+    stream.setEncoding('utf8');
+
+    const lineReader = ReadLine.createInterface({
+        input: stream
+    });
+
+    lineReader.on('line', (line) => {
+
+        try {
+            internals.parse(line);
+        }
+        catch (e) {
+            internals.error(e);
+        }
+    });
+};
+
+
+internals.error = function (e) {
+
+    Purdy(e);
+    process.exit(1);
+};
+
+
+internals.parse = function (str) {
+
+    const depth = internals.args.depth;
+
+    Purdy(JSON.parse(str), { depth });
 };
 
 
@@ -41,35 +114,29 @@ internals.main = function () {
 
     let stream = process.stdin;
 
-    try {
-        const depthIdx = process.argv.indexOf('--depth');
-        let depth = 2;
-        if (depthIdx !== -1) {
-            const pair = process.argv.splice(depthIdx, 2);
-            depth = parseFloat(pair[1]);
+    internals.args = internals.initalizeBossy();
 
-            if (String(depth) === 'NaN') {
-                const e = new Error('Depth requires a numerical value');
-                e.depth = pair[1];
-                Purdy(e);
-                process.exit(1);
-            }
-        }
-        if (process.argv[2] === '-') {
+    try {
+        if (internals.args.stdin) {
             stream = process.stdin;
+            internals.parseStream(stream);
         }
         else {
-            const path = Fs.realpathSync(process.argv[2]);
-            stream = Fs.createReadStream(path);
+            for (let i = 0; i < internals.args._.length; ++i) {
+                const file = internals.args._[i];
+                const path = Fs.realpathSync(file);
+                stream = Fs.createReadStream(path);
+                if (internals.args.log) {
+                    internals.logparse(stream);
+                }
+                else {
+                    internals.parseStream(stream);
+                }
+            }
         }
-        internals.stdin(stream, (str) => {
-
-            internals.parse(str, depth);
-        });
     }
     catch (e) {
-        Purdy(e);
-        process.exit(1);
+        internals.error(e);
     }
 };
 
