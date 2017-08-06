@@ -23,12 +23,32 @@ const internals = {
         's': {
             alias: 'stdin',
             description: 'parse from stdin',
+            default: false,
             type: 'boolean'
         },
         'l': {
             alias: 'log',
             description: 'file is in log format with one JSON string per line',
+            default: false,
             type: 'boolean'
+        },
+        'p': {
+            alias: 'path',
+            description: 'display path in object-path format',
+            default: false,
+            type: 'boolean'
+        },
+        'a': {
+            alias: 'arrayIndex',
+            description: 'display the index on arrays',
+            default: true,
+            type: 'boolean'
+        },
+        'i': {
+            alias: 'indent',
+            description: 'indent level for output',
+            default: 4,
+            type: 'number'
         }
     }
 };
@@ -48,6 +68,8 @@ internals.initalizeBossy = function () {
         process.exit(0);
     }
 
+    var p = require('purdy');
+    p(args);
     return args;
 };
 
@@ -105,8 +127,9 @@ internals.error = function (e) {
 internals.parse = function (str) {
 
     const depth = internals.args.depth;
+    const path = internals.args.path;
 
-    Purdy(JSON.parse(str), { depth });
+    Purdy(JSON.parse(str), { depth, path });
 };
 
 
