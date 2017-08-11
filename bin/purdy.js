@@ -68,8 +68,6 @@ internals.initalizeBossy = function () {
         process.exit(0);
     }
 
-    var p = require('purdy');
-    p(args);
     return args;
 };
 
