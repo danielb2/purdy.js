@@ -25,7 +25,7 @@ describe('Purdy', () => {
 
             const error = new Error('plain error');
             const out = Purdy.stringify(error);
-            expect(out).to.equal('\u001b[31m[Error: plain error]\u001b[39m');
+            expect(out).to.match(/\[31mError: plain error/);
             done();
         });
 
@@ -34,7 +34,7 @@ describe('Purdy', () => {
             const error = new Error();
             error.murray = 'rothbard';
             const out = Purdy.stringify(error);
-            expect(out).to.equal('{ \u001b[31m[Error]\u001b[39m\n    \u001b[1m\u001b[37mmurray\u001b[39m\u001b[22m: \u001b[33m\'rothbard\'\u001b[39m\n}');
+            expect(out).to.match(/31mError[^]*murray: 'rothbard'/);
             done();
         });
 
@@ -43,7 +43,7 @@ describe('Purdy', () => {
             const error = new Error('error with properties');
             error.code = 'BAD';
             const out = Purdy.stringify(error);
-            expect(out).to.equal('{ \u001b[31m[Error: error with properties]\u001b[39m\n    \u001b[1m\u001b[37mcode\u001b[39m\u001b[22m: \u001b[33m\'BAD\'\u001b[39m\n}');
+            expect(out).to.match(/31mError: error with properties[^]*code: 'BAD'/);
             done();
         });
 
@@ -51,11 +51,12 @@ describe('Purdy', () => {
 
             const error = new Error('some bad, bad error');
             error.withKey = 'key';
+            error.withMore = 'more';
             const obj = {
                 theError: error
             };
             const out = Purdy.stringify(obj, { depth: null });
-            expect(out).to.equal('{\n    \u001b[1m\u001b[37mtheError\u001b[39m\u001b[22m: { \u001b[31m[Error: some bad, bad error]\u001b[39m\n        \u001b[1m\u001b[37mwithKey\u001b[39m\u001b[22m: \u001b[33m\'key\'\u001b[39m\n    }\n}');
+            expect(out).to.match(/theError[^]*: { [^]*31mError: some bad, bad error[^]*withKey: 'key'[^]*withMore: 'more'/);
             done();
         });
     });
