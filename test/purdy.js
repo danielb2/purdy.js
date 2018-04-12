@@ -61,6 +61,29 @@ describe('Purdy', () => {
         });
     });
 
+    describe('buffers', () => {
+
+        it('should print as string if detected', (done) => {
+
+            const buffer = new Buffer('some longer string here that we dont actually want to print. maybe.');
+            const out = Purdy.stringify({ buffer });
+            expect(out).to.match(/<Buffer some longer string here t ... >/);
+
+            done();
+        });
+
+        it('should print binary', (done) => {
+
+            const fs = require('fs');
+            fs.readFile('/bin/sh', (err, data) => {
+
+                const out = Purdy.stringify({ data });
+                expect(out).to.match(/data.*Buffer/);
+                done();
+            });
+        });
+    });
+
     it('should print an object without a constructor', (done) => {
 
         const out = Purdy.stringify({ constructor: null });
