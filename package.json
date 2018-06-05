@@ -26,14 +26,14 @@
     "purdy": "bin/purdy.js"
   },
   "devDependencies": {
-    "code": "1.x.x",
-    "lab": "6.x.x"
+    "code": "^5.2.0",
+    "lab": "^15.5.0"
   },
   "dependencies": {
     "bossy": "^3.0.4",
     "chalk": "0.4.x",
-    "hoek": "2.x.x",
-    "joi": "6.x.x",
+    "hoek": "^5.0.3",
+    "joi": "^13.3.0",
     "moment": "^2.19.3"
   }
 }
