@@ -14,7 +14,7 @@ const expect = Code.expect;
 
 // Check for ES2015 function name inference
 
-const funcName = function () {};
+const funcName = function () { };
 const funcNameInfer = funcName.name === 'funcName';
 
 describe('Purdy', () => {
@@ -65,7 +65,7 @@ describe('Purdy', () => {
 
         it('should print as string if detected', (done) => {
 
-            const buffer = new Buffer('some longer string here that we dont actually want to print. maybe.');
+            const buffer = new Buffer.from('some longer string here that we dont actually want to print. maybe.');
             const out = Purdy.stringify({ buffer });
             expect(out).to.match(/<Buffer some longer string here t ... >/);
 
@@ -77,6 +77,7 @@ describe('Purdy', () => {
             const fs = require('fs');
             fs.readFile('/bin/sh', (err, data) => {
 
+                err = null;
                 const out = Purdy.stringify({ data });
                 expect(out).to.match(/data.*Buffer/);
                 done();
@@ -133,7 +134,7 @@ describe('Purdy', () => {
 
     it('should handle circular references', (done) => {
 
-        const circularObj = { };
+        const circularObj = {};
         circularObj.a = circularObj;
         const circ = [];
         circ.push(circ);
@@ -148,7 +149,7 @@ describe('Purdy', () => {
 
         it('should print constructor name', (done) => {
 
-            const mises = function mises () {
+            const mises = function mises() {
 
                 this.moop = 3;
             };
@@ -181,7 +182,7 @@ describe('Purdy', () => {
 
         it('should print an anonymous function', (done) => {
 
-            const out = Purdy.stringify(() => {});
+            const out = Purdy.stringify(() => { });
             const expected = '\u001b[36m[Function]\u001b[39m';
             expect(out).to.equal(expected);
             done();
@@ -189,7 +190,7 @@ describe('Purdy', () => {
 
         it('should print properties for functions', (done) => {
 
-            const obj = function () {};
+            const obj = function () { };
 
             obj.property = 3;
 
@@ -202,7 +203,7 @@ describe('Purdy', () => {
 
         it('should print properties for functions with name', (done) => {
 
-            const obj = function Liberty () {};
+            const obj = function Liberty() { };
 
             obj.property = 3;
 
@@ -338,7 +339,7 @@ describe('Purdy', () => {
 
         const out = Purdy.stringify(obj, { plain: false, path: true, align: 'right', depth: null });
         expect(out).to.equal('{\n    \u001b[1m\u001b[37mtravel\u001b[39m\u001b[22m: {\n        \u001b[34m// \u001b[39m\u001b[34mtravel.down\u001b[39m\n        \u001b[1m\u001b[37mdown\u001b[39m\u001b[22m: {\n            \u001b[34m// \u001b[39m\u001b[34mtravel.down.a\u001b[39m\n            \u001b[1m\u001b[37m  a\u001b[39m\u001b[22m: [\n                \u001b[34m// \u001b[39m\u001b[34mtravel.down.a.0\u001b[39m\n                [\u001b[1m\u001b[37m0\u001b[39m\u001b[22m] {\n                    \u001b[34m// \u001b[39m\u001b[34mtravel.down.a.0.path\u001b[39m\n                    \u001b[1m\u001b[37mpath\u001b[39m\u001b[22m: \u001b[33m\'to get here\'\u001b[39m\n                }\n            ]\n        }\n    }\n}');
-        expect(obj).to.deep.equal(orig);
+        expect(obj).to.equal(orig);
         done();
     });
 
@@ -529,4 +530,3 @@ describe('Purdy', () => {
         });
     });
 });
-
