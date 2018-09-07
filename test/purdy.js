@@ -1,7 +1,6 @@
 'use strict';
 
 const Code = require('code');
-const Hoek = require('hoek');
 const Lab = require('lab');
 const Purdy = require('../');
 
@@ -335,7 +334,7 @@ describe('Purdy', () => {
                 }
             }
         };
-        const orig = Hoek.clone(obj);
+        const orig = Object.assign({}, obj);
 
         const out = Purdy.stringify(obj, { plain: false, path: true, align: 'right', depth: null });
         expect(out).to.equal('{\n    \u001b[1m\u001b[37mtravel\u001b[39m\u001b[22m: {\n        \u001b[34m// \u001b[39m\u001b[34mtravel.down\u001b[39m\n        \u001b[1m\u001b[37mdown\u001b[39m\u001b[22m: {\n            \u001b[34m// \u001b[39m\u001b[34mtravel.down.a\u001b[39m\n            \u001b[1m\u001b[37m  a\u001b[39m\u001b[22m: [\n                \u001b[34m// \u001b[39m\u001b[34mtravel.down.a.0\u001b[39m\n                [\u001b[1m\u001b[37m0\u001b[39m\u001b[22m] {\n                    \u001b[34m// \u001b[39m\u001b[34mtravel.down.a.0.path\u001b[39m\n                    \u001b[1m\u001b[37mpath\u001b[39m\u001b[22m: \u001b[33m\'to get here\'\u001b[39m\n                }\n            ]\n        }\n    }\n}');
