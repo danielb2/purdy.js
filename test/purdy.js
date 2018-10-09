@@ -31,8 +31,8 @@ describe('Purdy', () => {
             expect(out).to.equal('{\n    year: 1999,\n    age: 24,\n    firstName: \'billy\',\n    lastName: \'bob\'\n}');
             done();
         });
-
     });
+
     describe('errors', () => {
 
         it('should display an error', (done) => {
