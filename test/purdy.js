@@ -27,8 +27,10 @@ describe('Purdy', () => {
             withAge.age = 24;
             const withYear = Object.create(withAge);
             withYear.year = 1999;
+            withYear.firstName = 'Billy';
+            withYear.lastName = 'Bob';
             const out = Purdy.stringify(withYear, { plain: true, proto: true });
-            expect(out).to.equal('{\n    year: 1999,\n    age: 24,\n    firstName: \'billy\',\n    lastName: \'bob\'\n}');
+            expect(out).to.equal('{\n    firstName: \'Billy\',\n    lastName: \'Bob\',\n    age: 24,\n    year: 1999\n}');
             done();
         });
     });
