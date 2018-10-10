@@ -22,13 +22,12 @@ describe('Purdy', () => {
 
         it('should print all inherited prototype props as well', (done) => {
 
-            const person = { firstName: 'billy', lastName: 'bob' };
+            const person = { firstName: 'billy', lastName: 'Bob' };
             const withAge = Object.create(person);
             withAge.age = 24;
             const withYear = Object.create(withAge);
             withYear.year = 1999;
             withYear.firstName = 'Billy';
-            withYear.lastName = 'Bob';
             const out = Purdy.stringify(withYear, { plain: true, proto: true });
             expect(out).to.equal('{\n    firstName: \'Billy\',\n    lastName: \'Bob\',\n    age: 24,\n    year: 1999\n}');
             done();
