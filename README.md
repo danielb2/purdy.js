@@ -20,12 +20,13 @@ you're dealing with.
 * `object` - anything, number, object, array, etc.
 * `options` - optional object with the following keys.
     * `plain` - when `true`, prints result without colors. Defaults to `false` with tty, `true` when not.
-    * `path` - when `true`, prints result with a path (To be used with [Hoek.reach()](https://github.com/spumko/hoek#reachobj-chain-options))
-    * `pathPrefix` - prefix for path. default: `// `
-    * `arrayIndex` - enables index printing for arrays. default: `true`
-    * `indent` - defines the number of spaces to indent default: `4`
-    * `align` - determines how to align object keys. default: `left`
-    * `depth` - tells purdy how many times to recurse while formatting the object. This is useful for viewing complicated objects. default: `2`. Set to `null` to recurse indefinitely
+    * `path` - when `true`, prints result with a path (To be used with [Hoek.reach()](https://github.com/spumko/hoek#reachobj-chain-options) or lodash.get, etc). Default: `false`
+    * `pathPrefix` - prefix for path. Default: `// `
+    * `arrayIndex` - enables index printing for arrays. Default: `true`
+    * `indent` - defines the number of spaces to indent. Default: `4`
+    * `align` - determines how to align object keys. Default: `left`
+    * `depth` - tells purdy how many times to recurse while formatting the object. This is useful for viewing complicated objects. Default: `2`. Set to `null` to recurse indefinitely
+    * `proto` - include the prototype chain and print all inherited properties as well. Default: `false`
 
 
 ### `Purdy.stringify(object, [options])`

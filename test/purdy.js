@@ -18,6 +18,21 @@ const funcNameInfer = funcName.name === 'funcName';
 
 describe('Purdy', () => {
 
+    describe('prototype print', () => {
+
+        it('should print all inherited prototype props as well', (done) => {
+
+            const person = { firstName: 'billy', lastName: 'bob' };
+            const withAge = Object.create(person);
+            withAge.age = 24;
+            const withYear = Object.create(withAge);
+            withYear.year = 1999;
+            const out = Purdy.stringify(withYear, { plain: true, proto: true });
+            expect(out).to.equal('{\n    year: 1999,\n    age: 24,\n    firstName: \'billy\',\n    lastName: \'bob\'\n}');
+            done();
+        });
+    });
+
     describe('errors', () => {
 
         it('should display an error', (done) => {
