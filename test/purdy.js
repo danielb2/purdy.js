@@ -90,6 +90,7 @@ describe('Purdy', () => {
         it('should print binary', (done) => {
 
             const fs = require('fs');
+
             fs.readFile('/bin/sh', (err, data) => {
 
                 err = null;
@@ -132,6 +133,7 @@ describe('Purdy', () => {
 
         const afunc = function () {
 
+            // eslint-disable-next-line prefer-rest-params
             const out = Purdy.stringify(arguments, { depth: null, plain: true, arrayIndex: false, indent: 2 });
             expect(out).to.equal('[\n  \'hello\',\n  \'purdy\'\n]');
             done();
@@ -168,6 +170,7 @@ describe('Purdy', () => {
 
                 this.moop = 3;
             };
+
             const obj = { instance: new mises() };
             const out = Purdy.stringify(obj, { indent: 1 });
             expect(out).to.equal('{\n \u001b[1m\u001b[37minstance\u001b[39m\u001b[22m: \u001b[32mmises\u001b[39m {\n  \u001b[1m\u001b[37mmoop\u001b[39m\u001b[22m: \u001b[1m\u001b[34m3\u001b[39m\u001b[22m\n }\n}');
@@ -180,6 +183,7 @@ describe('Purdy', () => {
 
                 this.moop = 3;
             };
+
             const obj = { instance: new mises() };
             const out = Purdy.stringify(obj, { indent: 1 });
             const inferred = funcNameInfer ? '\u001b[32mmises\u001b[39m ' : '';
@@ -393,6 +397,7 @@ describe('Purdy', () => {
 
             out += str;
         };
+
         Purdy('hello', { plain: true });
         process.stdout.write = stdout;
         expect(out).to.equal('\'hello\'\n');
