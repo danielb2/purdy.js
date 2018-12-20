@@ -91,8 +91,7 @@ describe('Purdy', () => {
 
             const buffer = new Buffer.from('shorter');
             const out = Purdy.stringify({ buffer });
-            expect(out).to.match(/<Buffer shorter>/);
-
+            expect(out).to.equal('{\n    \u001b[1m\u001b[37mbuffer\u001b[39m\u001b[22m: <Buffer shorter>\n}');
             done();
         });
 
