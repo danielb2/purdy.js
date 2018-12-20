@@ -87,6 +87,15 @@ describe('Purdy', () => {
             done();
         });
 
+        it('should not print ... if string is short', (done) => {
+
+            const buffer = new Buffer.from('shorter');
+            const out = Purdy.stringify({ buffer });
+            expect(out).to.match(/<Buffer shorter>/);
+
+            done();
+        });
+
         it('should print binary', (done) => {
 
             const fs = require('fs');
