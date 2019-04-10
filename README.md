@@ -82,9 +82,9 @@ package.json.
 
 Similarly, `cat package.json | purdy -s`  will use stdin to print the contents.
 
-A new option `-l` has been added to parse log files that has one JSON string per line in the file.
+A new option `-l` has been added to parse log files for newline delimited JSON (NDJSON).
 
-`purdy -l logfile.log` will print that.
+`purdy -l logfile.log` will print that or `cat app.log | purdy -l -s`
 
 ## Contributing
 
