@@ -133,8 +133,6 @@ internals.parse = function (str) {
 
 internals.main = function () {
 
-    let stream = process.stdin;
-
     internals.args = internals.initalizeBossy();
 
     try {
