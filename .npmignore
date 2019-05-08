@@ -1,1 +1,3 @@
-example.png
+*
+!lib/**
+!.npmignore
