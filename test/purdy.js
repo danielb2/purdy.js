@@ -18,6 +18,53 @@ const funcNameInfer = funcName.name === 'funcName';
 
 describe('Purdy', () => {
 
+    it('should print keys with spaces using quotes', (done) => {
+
+        const out = Purdy.stringify({ 'arya killed the night king': 'woot', normal: 'OK' }, { plain: true });
+        expect(out).to.equal('{\n    \'arya killed the night king\': \'woot\',\n    normal: \'OK\'\n}');
+        done();
+    });
+
+    it('should print multiple things', (done) => {
+
+        const purdy = Purdy.purdy({ plain: true });
+        const out = purdy.stringify('one', 'two', { three: 3 });
+        expect(out).to.equal('\'one\' \'two\' {\n    three: 3\n}');
+        done();
+    });
+
+    describe('json', () => {
+
+        it('should handle printing strings with json', (done) => {
+
+            const out = Purdy.stringify([1, 2, 1, 1, '{"foo": "bar", "int": 3 }'], { plain: true, json: true });
+            expect(out).to.equal('[\n    [0] 1,\n    [1] 2,\n    [2] 1,\n    [3] 1,\n    [4] Json {\n        foo: \'bar\',\n        int: 3\n    }\n]');
+            done();
+        });
+
+        it('should handle printing strings with json - color check', (done) => {
+
+            const out = Purdy.stringify('{"a":3}', { plain: false, json: true });
+            expect(out).to.equal('\u001b[33m\u001b[32m\u001b[32mJson\u001b[32m {\u001b[33m\u001b[39m\n\u001b[33m\u001b[32m    \u001b[1m\u001b[37ma\u001b[32m\u001b[22m: \u001b[1m\u001b[34m3\u001b[32m\u001b[22m\u001b[33m\u001b[39m\n\u001b[33m\u001b[32m}\u001b[33m\u001b[39m');
+            done();
+        });
+
+        it('should only print strings as json wrapped in {} to avoid mistaking for string', (done) => {
+
+            const out = Purdy.stringify('3', { plain: true, json: true });
+            expect(out).to.equal('\'3\'');
+            done();
+        });
+
+        it('shouldnt print json if json is false', (done) => {
+
+            const out = Purdy.stringify('{"a":3}', { plain: true, json: false });
+            expect(out).to.equal('\'{"a":3}\'');
+            done();
+        });
+
+    });
+
     describe('prototype print', () => {
 
         it('should print all inherited prototype props as well', (done) => {

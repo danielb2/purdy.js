@@ -27,6 +27,7 @@ you're dealing with.
     * `align` - determines how to align object keys. Default: `left`
     * `depth` - tells purdy how many times to recurse while formatting the object. This is useful for viewing complicated objects. Default: `2`. Set to `null` to recurse indefinitely
     * `proto` - include the prototype chain and print all inherited properties as well. Default: `false`
+    * `json` - attempt to parse strings beginning with { as JSON. Default: `false`
 
 
 ### `Purdy.stringify(object, [options])`
@@ -37,6 +38,16 @@ to be useful for log files other other applications.
 ``` javascript
 const purdyString = Purdy.stringify({a: 'b'}, {plain: true});
 writeLog(purdyString);
+```
+
+### `Purdy.purdy([options]);`
+
+Useful if you want to print multiple objects like console.log
+
+``` javascript
+const purdy = Purdy.purdy({plain: true});
+purdy.print('one', 'two');
+purdy.stringify('one', 'two');
 ```
 
 ### Examples
