@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 'use strict';
 
-const Bossy = require('bossy');
+const Bossy = require('@hapi/bossy');
 const Fs = require('fs');
 const Purdy = require('../');
 const ReadLine = require('readline');
