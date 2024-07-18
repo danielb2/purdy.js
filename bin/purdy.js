@@ -73,7 +73,7 @@ internals.initalizeBossy = function () {
 
 
 
-internals.parseStream = function (stream){
+internals.parseStream = function (stream) {
 
     let buf = '';
     stream.setEncoding('utf8');
@@ -95,7 +95,7 @@ internals.parseStream = function (stream){
 };
 
 
-internals.logparse = function (stream){
+internals.logparse = function (stream) {
 
     stream.setEncoding('utf8');
 

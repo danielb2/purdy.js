@@ -1,10 +1,10 @@
 {
   "name": "purdy",
-  "version": "3.5.2",
+  "version": "3.5.3",
   "description": "Pretty print objects in real purdy colors. Allows clearer visualization of objects than you get from most pretty printers due to colors. It will also print out the complete path to an object, something that's extremely useful for debugging. Purdy will also print out the path to access a variable using Hoek format making it useful on accessing values.",
   "main": "lib/index.js",
   "scripts": {
-    "test": "lab -a code -t 100 -v -I core,__core-js_shared__,BigUint64Array,BigInt64Array,BigInt,URL,URLSearchParams,TextEncoder,TextDecoder,queueMicrotask -L",
+    "test": "lab -a @hapi/code -t 100 -v -I core,__core-js_shared__,BigUint64Array,BigInt64Array,BigInt,URL,URLSearchParams,TextEncoder,TextDecoder,queueMicrotask -L",
     "lint": "eslint ."
   },
   "homepage": "https://github.com/danielb2/purdy.js",
@@ -27,12 +27,12 @@
     "purdy": "bin/purdy.js"
   },
   "devDependencies": {
-    "code": "^4.1.0",
-    "lab": "^14.3.4"
+    "@hapi/code": "^9.0.0",
+    "@hapi/lab": "^24.5.1"
   },
   "dependencies": {
     "@hapi/bossy": "^6.0.1",
     "chalk": "^2.4.1",
-    "joi": "^14.0.0"
+    "joi": "^17.0.0"
   }
 }
