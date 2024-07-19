@@ -374,6 +374,15 @@ describe('Purdy', () => {
         expect(obj).to.equal(orig);
     });
 
+
+    it('indents array the way it should when path set to true but no nested path', () => {
+
+        const obj = ['test'];
+        const out = Purdy.stringify(obj, { plain: false, path: true, align: 'right', depth: null });
+        expect(out).to.equal('[\n    [\u001b[1m\u001b[37m0\u001b[39m\u001b[22m] \u001b[33m\'test\'\u001b[39m\n]');
+        expect(obj).to.equal(['test']);
+    });
+
     it('indents object the way it should', () => {
 
         const obj = {
