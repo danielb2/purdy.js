@@ -1,0 +1,28 @@
+name: Test with coverage
+
+on:
+  push:
+    branches:
+      - master
+  pull_request:
+    branches:
+      - master
+
+defaults:
+  run:
+    # GitHub Actions run without a TTY device. This is a workaround to get one,
+    # based on https://github.com/actions/runner/issues/241#issuecomment-2019042651
+    shell: 'script --return --quiet --log-out /dev/null --command "bash -e {0}"'
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: 'npm'
+          cache-dependency-path: 'package-lock.json'
+      - run: npm ci
+      - run: FORCE_COLOR=1 npm test
